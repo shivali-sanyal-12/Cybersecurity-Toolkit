@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reverse Engineering</title>
+  <style>
+    body {
+      background-color: #0e0e0e;
+      color: #e0e0ff;
+      font-family: 'Fira Code', monospace;
+      margin: 0;
+    }
+    header {
+      background-color: #1b1b2f;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px #000;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #66f;
+      text-shadow: 0 0 10px #6688ff88;
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #161625;
+      border-radius: 20px;
+      box-shadow: 0 0 30px #3366ff44;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      font-size: 1.8rem;
+      color: #66f;
+      border-bottom: 2px solid #6688ff;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    p, ul {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .tool {
+      background: #111122;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 25px;
+      box-shadow: 0 0 20px #6688ff22;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      background: #222244;
+      border: none;
+      padding: 12px;
+      color: #66f;
+      border-radius: 8px;
+      margin: 10px 0 20px;
+      font-family: 'Fira Code', monospace;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #6688ff;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #4466dd;
+    }
+    .output {
+      background-color: #000000;
+      color: #66ff66;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+    nav {
+      text-align: center;
+      margin-top: 40px;
+    }
+    nav a {
+      color: #0f0;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 12px 28px;
+      background-color: #002222;
+      border: 2px solid #00ffcc;
+      border-radius: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #111122;
+      color: #66f;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Reverse Engineering</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>What is Reverse Engineering?</h2>
+      <p>Reverse engineering is the process of analyzing a system to identify its components and their relationships, often to recreate or understand how it works internally.</p>
+      <ul>
+        <li>Used to discover vulnerabilities, analyze malware, or recover lost source code.</li>
+        <li>Common tools: Ghidra, IDA Pro, Binary Ninja, x64dbg, Radare2.</li>
+        <li>Focuses on assembly code, binaries, file structures, and encryption routines.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Demo: Simple x86 Assembly Instruction Explanation</h2>
+      <div class="tool">
+        <label for="asmCode">Enter Simple Assembly Code:</label>
+        <textarea id="asmCode" rows="3">mov eax, 1</textarea>
+        <button onclick="analyzeAsm()">Analyze</button>
+        <div class="output" id="asmOutput"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Demo: Binary String to ASCII</h2>
+      <div class="tool">
+        <label for="binaryInput">Enter Binary String:</label>
+        <input type="text" id="binaryInput" value="01001000 01101001" />
+        <button onclick="binaryToText()">Convert</button>
+        <div class="output" id="binaryOutput"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>File Header Analyzer</h2>
+      <div class="tool">
+        <label for="fileHex">Enter File Hex Header (first few bytes):</label>
+        <input type="text" id="fileHex" value="4D5A" />
+        <button onclick="detectFileType()">Detect File Type</button>
+        <div class="output" id="fileTypeOutput"></div>
+      </div>
+    </section>
+
+    <nav>
+      <a href="index.html">⬅️ Back to Home</a>
+    </nav>
+  </main>
+
+  <footer>
+    © 2025 Cyber Toolkit | Decompile the Unknown
+  </footer>
+
+  <script>
+    function analyzeAsm() {
+      const code = document.getElementById("asmCode").value.toLowerCase();
+      let output = "Unknown instruction.";
+
+      if (code.includes("mov")) {
+        output = "MOV: Copies data from source to destination.";
+      } else if (code.includes("add")) {
+        output = "ADD: Adds source to destination.";
+      } else if (code.includes("jmp")) {
+        output = "JMP: Unconditional jump to another instruction.";
+      }
+
+      document.getElementById("asmOutput").textContent = output;
+    }
+
+    function binaryToText() {
+      const binary = document.getElementById("binaryInput").value.trim();
+      const chars = binary.split(" ").map(bin => String.fromCharCode(parseInt(bin, 2)));
+      document.getElementById("binaryOutput").textContent = "Decoded: " + chars.join('');
+    }
+
+    function detectFileType() {
+      const hex = document.getElementById("fileHex").value.toUpperCase();
+      let type = "Unknown file format";
+
+      if (hex.startsWith("4D5A")) type = "Windows Executable (PE)";
+      else if (hex.startsWith("89504E47")) type = "PNG Image";
+      else if (hex.startsWith("25504446")) type = "PDF Document";
+      else if (hex.startsWith("504B0304")) type = "ZIP Archive";
+
+      document.getElementById("fileTypeOutput").textContent = "Detected: " + type;
+    }
+  </script>
+</body>
+</html>

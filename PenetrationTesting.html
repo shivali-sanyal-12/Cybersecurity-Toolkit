@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Penetration Testing - Advanced Toolkit</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #e0e0e0;
+      margin: 0; padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #142b3b;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.7);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #ffd166;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: #f4a261;
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      background: rgba(20, 43, 59, 0.9);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    section h2 {
+      font-size: 2rem;
+      border-bottom: 3px solid #ffd166;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      color: #ffd166;
+    }
+    p, ul {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #dbe9f4;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 12px;
+    }
+    a {
+      color: #ffd166;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #f4a261;
+      text-decoration: underline;
+    }
+    .demo {
+      background: #1c3a52;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: inset 0 0 20px #ffd16644;
+      color: #f4a261;
+      text-align: center;
+      user-select: none;
+    }
+    .btn {
+      margin-top: 15px;
+      padding: 12px 25px;
+      background-color: #ffd166;
+      color: #142b3b;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 15px #ffd16644;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #f4a261;
+      color: #142b3b;
+      box-shadow: 0 7px 20px #f4a26144;
+    }
+    nav {
+      text-align: center;
+      margin-top: 30px;
+    }
+    nav a {
+      padding: 12px 24px;
+      background: #ffd166;
+      color: #142b3b;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 15px #ffd16644;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #f4a261;
+      box-shadow: 0 6px 20px #f4a26144;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #142b3b;
+      color: #e0e0e0;
+      font-size: 0.9rem;
+      margin-top: auto;
+      box-shadow: inset 0 1px 3px #ffd16644;
+    }
+    #scanResults {
+      margin-top: 20px;
+      text-align: left;
+      max-height: 200px;
+      overflow-y: auto;
+      background: #0b1c2a;
+      padding: 15px;
+      border-radius: 12px;
+      font-family: monospace;
+      font-size: 0.95rem;
+      color: #f4a261;
+      box-shadow: inset 0 0 10px #f4a26144;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Penetration Testing</h1>
+    <p>Simulated Port Scan & Fundamentals</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>🔎 Simulated Port Scan Demo</h2>
+      <div class="demo">
+        <p>Enter a target IP address (format: x.x.x.x) to simulate a quick port scan for common ports.</p>
+        <input type="text" id="targetIp" placeholder="e.g. 192.168.1.1" style="padding:8px 12px; border-radius:8px; border:none; width: 250px; font-size:1rem;">
+        <br />
+        <button class="btn" id="startScanBtn">Start Scan</button>
+        <div id="scanResults"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>⚙️ What is Penetration Testing?</h2>
+      <p>Penetration Testing (Pentesting) is a simulated cyberattack against your computer system to check for exploitable vulnerabilities.</p>
+      <ul>
+        <li><strong>Reconnaissance:</strong> Gathering info about target system.</li>
+        <li><strong>Scanning:</strong> Identifying live hosts, open ports, and services.</li>
+        <li><strong>Exploitation:</strong> Attempting to exploit vulnerabilities.</li>
+        <li><strong>Post-Exploitation:</strong> Assessing the impact and maintaining access.</li>
+        <li><strong>Reporting:</strong> Documenting findings & remediation steps.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📌 Common Pentesting Tools</h2>
+      <ul>
+        <li><strong>Nmap:</strong> Network scanner to discover hosts and services.</li>
+        <li><strong>Metasploit:</strong> Framework for developing and executing exploits.</li>
+        <li><strong>Burp Suite:</strong> Web vulnerability scanner.</li>
+        <li><strong>Wireshark:</strong> Network traffic analyzer.</li>
+        <li><strong>John the Ripper:</strong> Password cracking tool.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🔗 Learn More</h2>
+      <ul>
+        <li><a href="https://www.offensive-security.com/metasploit-unleashed/" target="_blank" rel="noopener">Offensive Security - Metasploit Unleashed</a></li>
+        <li><a href="https://nmap.org/book/zenmap-manual.html" target="_blank" rel="noopener">Nmap Network Scanning</a></li>
+        <li><a href="https://portswigger.net/burp" target="_blank" rel="noopener">Burp Suite Official</a></li>
+        <li><a href="https://www.kali.org/tools/" target="_blank" rel="noopener">Kali Linux Pentesting Tools</a></li>
+      </ul>
+    </section>
+
+    <nav><a href="index.html">⬅️ Back to Home</a></nav>
+  </main>
+
+  <footer>© 2025 Cyber Toolkit | Crafted for hackers & learners</footer>
+
+  <script>
+    const startScanBtn = document.getElementById('startScanBtn');
+    const scanResults = document.getElementById('scanResults');
+    const targetIpInput = document.getElementById('targetIp');
+
+    // Common ports to scan
+    const commonPorts = [21, 22, 23, 25, 53, 80, 110, 139, 143, 443, 445, 3389];
+
+    function validateIp(ip) {
+      const regex = /^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$/;
+      return regex.test(ip);
+    }
+
+    startScanBtn.addEventListener('click', () => {
+      const targetIp = targetIpInput.value.trim();
+      scanResults.textContent = '';
+      if (!validateIp(targetIp)) {
+        scanResults.textContent = "❌ Invalid IP address format. Please enter a valid IPv4 address.";
+        scanResults.style.color = '#ff6b6b';
+        return;
+      }
+      scanResults.style.color = '#f4a261';
+      scanResults.textContent = `Starting port scan on ${targetIp}...\n\n`;
+      startScanBtn.disabled = true;
+      targetIpInput.disabled = true;
+
+      let portIndex = 0;
+
+      function scanNextPort() {
+        if (portIndex >= commonPorts.length) {
+          scanResults.textContent += "\nScan complete.";
+          startScanBtn.disabled = false;
+          targetIpInput.disabled = false;
+          return;
+        }
+
+        const port = commonPorts[portIndex];
+        // Simulate port open/closed randomly with weighted chance
+        const isOpen = Math.random() < 0.4; // 40% chance port is open
+
+        setTimeout(() => {
+          scanResults.textContent += `Port ${port}: ${isOpen ? "OPEN" : "closed"}\n`;
+          portIndex++;
+          scanNextPort();
+        }, 700);
+      }
+
+      scanNextPort();
+    });
+  </script>
+</body>
+</html>

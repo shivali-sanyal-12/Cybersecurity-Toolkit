@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Network Security - Advanced Toolkit</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #003366, #004d99, #0066cc);
+      color: #f0f8ff;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #00264d;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: #a0d8ef;
+      text-shadow: 0 0 10px #a0d8efcc;
+      text-transform: uppercase;
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      background: #003d66dd;
+      border-radius: 20px;
+      padding: 35px 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+      color: #cce6ff;
+    }
+    section {
+      margin-bottom: 45px;
+    }
+    section h2 {
+      font-size: 2.2rem;
+      border-bottom: 4px solid #a0d8ef;
+      padding-bottom: 12px;
+      margin-bottom: 30px;
+      color: #a0d8ef;
+    }
+    p, ul {
+      font-size: 1.2rem;
+      line-height: 1.7;
+    }
+    ul {
+      padding-left: 22px;
+    }
+    ul li {
+      margin-bottom: 14px;
+    }
+    .sniffer {
+      background: #002f59;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: inset 0 0 18px #a0d8ef77;
+      font-family: monospace;
+      color: #b0e0ff;
+      max-height: 320px;
+      overflow-y: auto;
+      user-select: none;
+    }
+    .packet {
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      border: 1px solid #4db8ffaa;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    .packet:hover {
+      background-color: #4db8ff44;
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 13px 28px;
+      background-color: #a0d8ef;
+      color: #003d66;
+      border: none;
+      border-radius: 15px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 6px 18px #a0d8ef88;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #74b9ff;
+      color: #001f33;
+      box-shadow: 0 8px 25px #74b9ffaa;
+    }
+    nav {
+      text-align: center;
+      margin-top: 35px;
+    }
+    nav a {
+      padding: 14px 30px;
+      background: #a0d8ef;
+      color: #003d66;
+      border-radius: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 5px 20px #a0d8ef88;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #74b9ff;
+      box-shadow: 0 7px 25px #74b9ffaa;
+      color: #001f33;
+    }
+    footer {
+      text-align: center;
+      padding: 18px;
+      background: #00264d;
+      color: #b0d8ffcc;
+      font-size: 0.95rem;
+      margin-top: auto;
+      box-shadow: inset 0 1px 4px #a0d8ef44;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Network Security</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>🔐 Overview</h2>
+      <p>Network security encompasses policies, practices, and tools designed to protect network infrastructure and data against unauthorized access, misuse, malfunction, or destruction.</p>
+      <ul>
+        <li>Firewalls & Intrusion Detection Systems (IDS)</li>
+        <li>Virtual Private Networks (VPNs)</li>
+        <li>Encryption & Secure Protocols (TLS/SSL)</li>
+        <li>Access Controls & Authentication</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🕵️ Packet Sniffer Demo</h2>
+      <div class="sniffer" id="packetSniffer">
+        <!-- Packets will appear here -->
+      </div>
+      <button class="btn" id="captureBtn">Capture Packet</button>
+      <p><em>Click on a packet to view details.</em></p>
+    </section>
+
+    <section>
+      <h2>📚 Learn More</h2>
+      <ul>
+        <li><a href="https://www.cisco.com/c/en/us/products/security/what-is-network-security.html" target="_blank" rel="noopener" style="color:#a0d8ef;">Cisco: What is Network Security?</a></li>
+        <li><a href="https://www.cloudflare.com/learning/network-layer/" target="_blank" rel="noopener" style="color:#a0d8ef;">Cloudflare: Network Layer Security</a></li>
+        <li><a href="https://www.sans.org/network-security/" target="_blank" rel="noopener" style="color:#a0d8ef;">SANS Institute: Network Security Resources</a></li>
+      </ul>
+    </section>
+
+    <nav><a href="index.html">⬅️ Back to Home</a></nav>
+  </main>
+
+  <footer>© 2025 Cyber Toolkit | Crafted for hackers & learners</footer>
+
+  <script>
+    const packetSniffer = document.getElementById('packetSniffer');
+    const captureBtn = document.getElementById('captureBtn');
+
+    // Simulated network packets data
+    const packets = [
+      {
+        src: "192.168.1.10",
+        dst: "172.217.3.110",
+        protocol: "TCP",
+        info: "HTTP GET /index.html",
+        size: "512 bytes",
+        time: "14:48:05"
+      },
+      {
+        src: "10.0.0.5",
+        dst: "8.8.8.8",
+        protocol: "ICMP",
+        info: "Echo (ping) request",
+        size: "64 bytes",
+        time: "14:49:12"
+      },
+      {
+        src: "192.168.1.12",
+        dst: "172.217.3.110",
+        protocol: "TCP",
+        info: "HTTP 200 OK",
+        size: "2048 bytes",
+        time: "14:49:15"
+      },
+      {
+        src: "192.168.1.15",
+        dst: "10.10.10.10",
+        protocol: "UDP",
+        info: "DNS query",
+        size: "128 bytes",
+        time: "14:50:10"
+      },
+      {
+        src: "172.16.0.7",
+        dst: "192.168.1.255",
+        protocol: "ARP",
+        info: "Who has 192.168.1.1? Tell 172.16.0.7",
+        size: "28 bytes",
+        time: "14:50:55"
+      }
+    ];
+
+    function displayPacket(packet) {
+      return `
+        <div class="packet">
+          <strong>${packet.time}</strong> | 
+          <span>Src: ${packet.src}</span> → <span>Dst: ${packet.dst}</span> | 
+          <span>Protocol: ${packet.protocol}</span><br/>
+          Info: ${packet.info} | Size: ${packet.size}
+        </div>`;
+    }
+
+    // Add new packet on clicking capture button
+    captureBtn.onclick = () => {
+      if (packets.length === 0) {
+        alert('No more packets to capture!');
+        return;
+      }
+      const packet = packets.shift();
+      const div = document.createElement('div');
+      div.className = 'packet';
+      div.innerHTML = `<strong>${packet.time}</strong> | Src: ${packet.src} → Dst: ${packet.dst} | Protocol: ${packet.protocol}`;
+      packetSniffer.prepend(div);
+
+      // Show details on click
+      div.onclick = () => {
+        alert(
+          `Packet Details:\n
+Time: ${packet.time}
+Source IP: ${packet.src}
+Destination IP: ${packet.dst}
+Protocol: ${packet.protocol}
+Information: ${packet.info}
+Size: ${packet.size}`
+        );
+      };
+
+      // Limit max packets displayed
+      if (packetSniffer.children.length > 6) {
+        packetSniffer.removeChild(packetSniffer.lastChild);
+      }
+    };
+  </script>
+</body>
+</html>

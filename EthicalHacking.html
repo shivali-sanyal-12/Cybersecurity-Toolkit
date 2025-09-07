@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ethical Hacking — Advanced Demo</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+<style>
+  :root {
+    --primary: #2196f3;
+    --primary-dark: #0d47a1;
+    --bg-light: #f5f7fa;
+    --bg-dark: #121212;
+    --text-light: #eee;
+    --text-dark: #222;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-light);
+    color: var(--text-dark);
+    transition: background 0.3s, color 0.3s;
+  }
+  body.dark {
+    background: var(--bg-dark);
+    color: var(--text-light);
+  }
+  header {
+    background: var(--primary);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+  h1, h2 {
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  .phase-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .phase-list li {
+    background: var(--primary-dark);
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    color: #bbdefb;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s;
+  }
+  .phase-list li:hover {
+    background: #1976d2;
+  }
+  .phase-list li.active {
+    background: #0d47a1;
+  }
+  .phase-desc {
+    max-height: 0;
+    overflow: hidden;
+    background: var(--primary-light, #90caf9);
+    color: var(--primary-dark);
+    border-radius: 0 0 10px 10px;
+    padding: 0 15px;
+    font-weight: 600;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+  }
+  .phase-desc.open {
+    max-height: 200px;
+    padding: 15px;
+  }
+  /* Code block styles */
+  pre {
+    background: #272822;
+    color: #f8f8f2;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  button.copy-btn {
+    background: var(--primary);
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    float: right;
+    margin-top: -40px;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+  button.copy-btn:hover {
+    opacity: 1;
+  }
+  /* Theme toggle */
+  .theme-toggle {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    background: var(--primary);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
+  /* Tooltip */
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+  }
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 180px;
+    background-color: var(--primary-dark);
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+<button class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+<header>
+  <h1>Ethical Hacking</h1>
+  <p>Authorized hacking to find security flaws and fix them</p>
+</header>
+<main>
+  <p>Ethical hacking means authorized attempts to access systems to find vulnerabilities and fix them before malicious hackers exploit them.</p>
+  
+  <h2>Common Phases <span class="tooltip">❓
+    <span class="tooltiptext">Click each phase to see description</span>
+  </span></h2>
+  <ul class="phase-list" role="list" aria-label="Phases of Ethical Hacking">
+    <li tabindex="0" aria-expanded="false" aria-controls="desc1">Reconnaissance</li>
+    <div id="desc1" class="phase-desc" role="region" aria-live="polite">
+      Gathering information about the target to understand weaknesses.
+    </div>
+
+    <li tabindex="0" aria-expanded="false" aria-controls="desc2">Scanning</li>
+    <div id="desc2" class="phase-desc" role="region" aria-live="polite">
+      Using tools to identify vulnerabilities and open ports.
+    </div>
+
+    <li tabindex="0" aria-expanded="false" aria-controls="desc3">Exploitation</li>
+    <div id="desc3" class="phase-desc" role="region" aria-live="polite">
+      Attempting to exploit weaknesses to gain access.
+    </div>
+
+    <li tabindex="0" aria-expanded="false" aria-controls="desc4">Reporting</li>
+    <div id="desc4" class="phase-desc" role="region" aria-live="polite">
+      Documenting the findings and recommending fixes.
+    </div>
+  </ul>
+
+  <h2>Example: Simple Port Scan Demo</h2>
+  <p>Enter IP address and see if common ports 21, 22, 80, 443 are "open" or "closed" (simulated):</p>
+  <input type="text" id="ipInput" placeholder="Enter IP (e.g. 192.168.1.1)" />
+  <button id="scanBtn">Scan Ports</button>
+  <div id="scanResult" aria-live="polite" style="margin-top: 1rem;"></div>
+
+  <h2>Sample Code Snippet</h2>
+  <button class="copy-btn" data-target="code1">Copy Code</button>
+  <pre><code id="code1" class="language-javascript">
+// Simple port scan simulation
+function simulatePortScan(ip) {
+  const ports = [21, 22, 80, 443];
+  return ports.map(port => {
+    // Random open/closed
+    const open = Math.random() > 0.5;
+    return { port, status: open ? 'open' : 'closed' };
+  });
+}
+  </code></pre>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script>
+  // Dark mode toggle
+  const toggleBtn = document.querySelector('.theme-toggle');
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    toggleBtn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+  });
+
+  // Collapsible phases
+  const phaseItems = document.querySelectorAll('.phase-list > li');
+  phaseItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      const desc = document.getElementById(item.getAttribute('aria-controls'));
+      const isOpen = desc.classList.contains('open');
+      // Close all others
+      document.querySelectorAll('.phase-desc.open').forEach(d => {
+        d.classList.remove('open');
+        d.previousElementSibling.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        desc.classList.add('open');
+        item.setAttribute('aria-expanded', 'true');
+      }
+    });
+    // Accessibility: toggle on enter or space
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        item.click();
+      }
+    });
+  });
+
+  // Simulate port scan demo
+  document.getElementById('scanBtn').addEventListener('click', () => {
+    const ip = document.getElementById('ipInput').value.trim();
+    const resultDiv = document.getElementById('scanResult');
+    if (!ip) {
+      resultDiv.textContent = 'Please enter a valid IP address.';
+      return;
+    }
+    resultDiv.textContent = 'Scanning...';
+    setTimeout(() => {
+      const results = simulatePortScan(ip);
+      resultDiv.innerHTML = '<ul>' + results.map(r => `<li>Port ${r.port}: <strong>${r.status}</strong></li>`).join('') + '</ul>';
+    }, 1000);
+  });
+
+  // Copy code snippet
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const code = document.getElementById(targetId).textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => (btn.textContent = 'Copy Code'), 1500);
+      });
+    });
+  });
+</script>
+</body>
+</html>

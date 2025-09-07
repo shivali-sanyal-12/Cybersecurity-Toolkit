@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blockchain Concepts</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #e0ffe0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+      background-color: #1a1a1a;
+      box-shadow: 0 4px 15px #000a;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #00ffcc;
+      text-shadow: 0 0 10px #00ffccaa;
+      letter-spacing: 1.5px;
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #1b1b1b;
+      border-radius: 18px;
+      box-shadow: 0 0 30px #00ffcc33;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      font-size: 1.8rem;
+      color: #00ffcc;
+      border-bottom: 2px solid #00ffcc;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+    p, ul {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 25px;
+    }
+    .block {
+      background: #111;
+      border: 2px solid #00ffcc77;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+    .block label {
+      font-weight: bold;
+    }
+    .block input, .block textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #222;
+      color: #00ffcc;
+      font-family: monospace;
+      font-size: 1rem;
+    }
+    .block .hash {
+      background-color: #000;
+      color: #33ff99;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      overflow-wrap: break-word;
+      user-select: all;
+    }
+    button {
+      background-color: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #00e6b8;
+    }
+    nav {
+      text-align: center;
+      margin-top: 30px;
+    }
+    nav a {
+      color: #0f0;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 12px 28px;
+      border-radius: 12px;
+      background-color: #002f2f;
+      border: 2px solid #00ffcc;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #111;
+      color: #00ffcc;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Blockchain Technology</h1>
+  </header>
+  <main>
+    <section>
+      <h2>What is Blockchain?</h2>
+      <p>Blockchain is a decentralized, distributed ledger that records transactions across many computers. It's immutable, transparent, and secure due to cryptographic techniques and consensus algorithms.</p>
+      <ul>
+        <li>Each block contains data, a hash, and the hash of the previous block.</li>
+        <li>If the data changes, the hash changes – breaking the chain.</li>
+        <li>This structure makes blockchain tamper-resistant.</li>
+        <li>Used in cryptocurrencies, supply chain, voting systems, etc.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Blockchain Demo: Block Hashing</h2>
+      <div class="block">
+        <label for="blockData">Block Data:</label>
+        <textarea id="blockData" rows="4">Transaction: Alice → Bob (5 BTC)</textarea>
+
+        <label for="prevHash">Previous Block Hash:</label>
+        <input type="text" id="prevHash" value="0000000000000000000abcdef1234567890" />
+
+        <button onclick="generateHash()">Generate Block Hash</button>
+
+        <div class="hash" id="blockHash">Hash will appear here...</div>
+      </div>
+    </section>
+
+    <nav>
+      <a href="index.html">⬅️ Back to Home</a>
+    </nav>
+  </main>
+
+  <footer>
+    © 2025 Cyber Toolkit | Immutable Ledger, Infinite Trust
+  </footer>
+
+  <script>
+    async function generateHash() {
+      const data = document.getElementById("blockData").value;
+      const prev = document.getElementById("prevHash").value;
+      const combined = data + prev;
+
+      const encoder = new TextEncoder();
+      const dataBuf = encoder.encode(combined);
+
+      const hashBuf = await crypto.subtle.digest("SHA-256", dataBuf);
+      const hashArray = Array.from(new Uint8Array(hashBuf));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+      document.getElementById("blockHash").textContent = hashHex;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Social Engineering - Advanced Toolkit</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+      color: #fff;
+      margin: 0; padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #2f0b52;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.7);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 0 10px #ffaf7b;
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      background: rgba(47, 11, 82, 0.9);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    section h2 {
+      font-size: 2rem;
+      border-bottom: 3px solid #ffaf7b;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      color: #ffaf7b;
+    }
+    p, ul {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 20px;
+      color: #ffd;
+    }
+    ul li {
+      margin-bottom: 12px;
+    }
+    a {
+      color: #ffd;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .demo {
+      background: #48115a;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: inset 0 0 20px #ffaf7b44;
+      color: #ffda79;
+      text-align: center;
+      user-select: none;
+    }
+    .btn {
+      margin-top: 15px;
+      padding: 12px 25px;
+      background-color: #ffaf7b;
+      color: #2f0b52;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 15px #ffaf7b88;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #d76d77;
+      color: #fff;
+      box-shadow: 0 7px 20px #d76d7788;
+    }
+    nav {
+      text-align: center;
+      margin-top: 30px;
+    }
+    nav a {
+      padding: 12px 24px;
+      background: #ffaf7b;
+      color: #2f0b52;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 15px #ffaf7b88;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #d76d77;
+      box-shadow: 0 6px 20px #d76d7788;
+      color: #fff;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #2f0b52;
+      color: #fff;
+      font-size: 0.9rem;
+      margin-top: auto;
+      box-shadow: inset 0 1px 3px #ffaf7b44;
+    }
+    #phishingTest {
+      text-align: left;
+      margin-top: 20px;
+      font-family: monospace;
+      background: #3c1d5a;
+      border-radius: 12px;
+      padding: 20px;
+      color: #ffda79;
+      max-height: 250px;
+      overflow-y: auto;
+      box-shadow: inset 0 0 10px #ffaf7b44;
+    }
+    .email-subject {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .option {
+      background: #5e2970;
+      margin: 8px 0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .option:hover {
+      background-color: #ffaf7b;
+      color: #2f0b52;
+    }
+    .option.correct {
+      background-color: #44c767;
+      color: #fff;
+      cursor: default;
+    }
+    .option.incorrect {
+      background-color: #d9534f;
+      color: #fff;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Social Engineering</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>🤔 What is Social Engineering?</h2>
+      <p>Social Engineering is a psychological manipulation technique hackers use to trick people into revealing confidential information or performing actions that compromise security.</p>
+      <ul>
+        <li>Phishing: Fraudulent emails or messages to steal credentials.</li>
+        <li>Pretexting: Creating fabricated stories to gain trust.</li>
+        <li>Baiting: Offering something enticing to get victims to act.</li>
+        <li>Tailgating: Gaining physical access by following authorized personnel.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🛡️ Recognize a Phishing Email - Demo Test</h2>
+      <div class="demo">
+        <p>Read the email subject below and select if it’s a phishing attempt or safe.</p>
+        <div id="phishingTest"></div>
+        <button class="btn" id="nextBtn">Next Email</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>📚 Learn More</h2>
+      <ul>
+        <li><a href="https://www.social-engineer.org/" target="_blank" rel="noopener">Social Engineer.org - Official Resource</a></li>
+        <li><a href="https://www.cisa.gov/uscert/ncas/tips/ST04-014" target="_blank" rel="noopener">CISA: Avoiding Phishing Attacks</a></li>
+        <li><a href="https://www.phishing.org/what-is-phishing" target="_blank" rel="noopener">Phishing.org - Education</a></li>
+        <li><a href="https://www.youtube.com/watch?v=3B2jbbR_Wfk" target="_blank" rel="noopener">YouTube: Social Engineering Explained</a></li>
+      </ul>
+    </section>
+
+    <nav><a href="index.html">⬅️ Back to Home</a></nav>
+  </main>
+
+  <footer>© 2025 Cyber Toolkit | Crafted for hackers & learners</footer>
+
+  <script>
+    const emails = [
+      {
+        subject: "Urgent: Your account will be suspended! Verify now!",
+        phishing: true
+      },
+      {
+        subject: "Meeting agenda for next week",
+        phishing: false
+      },
+      {
+        subject: "You've won a $1000 gift card! Click here to claim.",
+        phishing: true
+      },
+      {
+        subject: "Invoice for your recent purchase attached",
+        phishing: false
+      },
+      {
+        subject: "Security alert: Unusual login detected in your account",
+        phishing: true
+      },
+      {
+        subject: "Team outing scheduled for Friday evening",
+        phishing: false
+      }
+    ];
+
+    let currentIndex = 0;
+
+    const phishingTest = document.getElementById('phishingTest');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function loadEmail(index) {
+      phishingTest.innerHTML = '';
+      const email = emails[index];
+
+      const subjectDiv = document.createElement('div');
+      subjectDiv.classList.add('email-subject');
+      subjectDiv.textContent = "Subject: " + email.subject;
+      phishingTest.appendChild(subjectDiv);
+
+      ['Phishing Attempt', 'Safe Email'].forEach(optionText => {
+        const option = document.createElement('div');
+        option.classList.add('option');
+        option.textContent = optionText;
+        option.onclick = () => {
+          if(option.classList.contains('correct') || option.classList.contains('incorrect')) return;
+
+          if ((email.phishing && optionText === 'Phishing Attempt') ||
+              (!email.phishing && optionText === 'Safe Email')) {
+            option.classList.add('correct');
+          } else {
+            option.classList.add('incorrect');
+          }
+          // Disable all options after selection
+          Array.from(phishingTest.querySelectorAll('.option')).forEach(el => {
+            el.style.pointerEvents = 'none';
+            if(!el.classList.contains('correct') && !el.classList.contains('incorrect')) {
+              el.style.opacity = 0.6;
+            }
+          });
+        };
+        phishingTest.appendChild(option);
+      });
+    }
+
+    nextBtn.onclick = () => {
+      currentIndex++;
+      if(currentIndex >= emails.length) currentIndex = 0;
+      loadEmail(currentIndex);
+    };
+
+    loadEmail(currentIndex);
+  </script>
+</body>
+</html>

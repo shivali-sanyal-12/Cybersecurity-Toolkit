@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OSINT - Digital Investigation Toolkit</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    nav {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      padding: 15px 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav h1 {
+      font-weight: 600;
+      font-size: 1.8rem;
+      cursor: pointer;
+      user-select: none;
+      color: #fff;
+      text-shadow: 0 0 6px rgba(0,0,0,0.5);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+    nav ul li a {
+      color: #fff;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      background: rgba(255, 255, 255, 0.3);
+      text-decoration: none;
+    }
+    main {
+      max-width: 1000px;
+      margin: 40px auto 60px;
+      padding: 0 20px;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      text-shadow: 0 0 4px rgba(0,0,0,0.3);
+    }
+    section {
+      margin-bottom: 48px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+    ul.resources {
+      list-style: none;
+      padding-left: 0;
+    }
+    ul.resources li {
+      margin-bottom: 14px;
+      font-size: 1.1rem;
+    }
+    ul.resources li a {
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    ul.resources li a:hover {
+      border-color: #ffd700;
+    }
+    /* Tooltip styling */
+    .tooltip {
+      position: relative;
+      cursor: help;
+      border-bottom: 1px dotted #fff;
+    }
+    .tooltip:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: 150%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.85);
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+      color: #fff;
+      font-size: 0.85rem;
+      opacity: 1;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+    /* IP Lookup form */
+    .ip-lookup {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      max-width: 420px;
+    }
+    .ip-lookup input[type="text"] {
+      flex: 1 1 auto;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+    }
+    .ip-lookup button {
+      background: #ffd700;
+      color: #222;
+      border: none;
+      padding: 12px 20px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .ip-lookup button:hover {
+      background: #e6c200;
+    }
+    .result-box {
+      margin-top: 24px;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 20px;
+      border-radius: 12px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      user-select: text;
+      min-height: 100px;
+      color: #ffeb3b;
+      font-size: 1.1rem;
+      box-shadow: 0 0 15px #ffeb3b88;
+    }
+    footer {
+      text-align: center;
+      padding: 25px 10px;
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      color: #eee;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+      user-select: none;
+    }
+    @media (max-width: 600px) {
+      nav ul {
+        gap: 12px;
+      }
+      .ip-lookup {
+        flex-direction: column;
+      }
+      .ip-lookup button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1 onclick="location.href='index.html'">Toolkit</h1>
+    <ul>
+      <li><a href="osint.html" class="active">OSINT</a></li>
+      <li><a href="steganography.html">Steganography</a></li>
+      <li><a href="cryptography.html">Cryptography</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Open Source Intelligence (OSINT)</h2>
+      <p>OSINT is the art and science of collecting data from publicly available sources to produce actionable intelligence.</p>
+      <p>Used by investigators, researchers, and cybersecurity professionals to gather information legally and ethically.</p>
+    </section>
+
+    <section>
+      <h2>🔍 Essential OSINT Tools & Resources</h2>
+      <ul class="resources">
+        <li><a href="https://www.maltego.com/" target="_blank">Maltego</a> – Visual link analysis & data mining tool</li>
+        <li><a href="https://www.shodan.io/" target="_blank">Shodan</a> – Search engine for internet-connected devices</li>
+        <li><a href="https://haveibeenpwned.com/" target="_blank">Have I Been Pwned</a> – Check if your email/account was part of a data breach</li>
+        <li><a href="https://intelx.io/" target="_blank">IntelX</a> – Powerful search engine for deep web and leaked data</li>
+        <li><a href="https://www.spokeo.com/" target="_blank">Spokeo</a> – People search engine aggregating public data</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🛠 Interactive IP Lookup Demo</h2>
+      <p>Enter any IPv4 address below to simulate an IP geolocation lookup (demo only):</p>
+      <form id="ipForm" class="ip-lookup" onsubmit="return simulateIpLookup(event)">
+        <input type="text" id="ipInput" placeholder="e.g. 8.8.8.8" pattern="^((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.|$)){4}$" required title="Enter a valid IPv4 address" />
+        <button type="submit">Lookup</button>
+      </form>
+      <pre id="ipResult" class="result-box" aria-live="polite"></pre>
+    </section>
+
+    <section>
+      <h2>Additional OSINT Techniques <span class="tooltip" data-tip="Check username availability across platforms">ⓘ</span></h2>
+      <ul>
+        <li>Username & Email Cross-Platform Searches (e.g. <a href="https://namechk.com/" target="_blank" style="color:#ffd700;">NameChk</a>)</li>
+        <li>Metadata Extraction from Images & Documents</li>
+        <li>Social Media Profiling & Timeline Analysis</li>
+        <li>Public Records & Domain WHOIS Lookups</li>
+        <li>Geolocation & Satellite Imagery Investigation</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Digital Investigation Toolkit • OSINT Section • &copy; 2025
+  </footer>
+
+  <script>
+    function simulateIpLookup(event) {
+      event.preventDefault();
+      const ip = document.getElementById('ipInput').value.trim();
+      const resultBox = document.getElementById('ipResult');
+
+      // Simple fake geolocation data generator for demo
+      const fakeLocations = [
+        { city: 'Mountain View', region: 'California', country: 'USA', isp: 'Google LLC' },
+        { city: 'New York', region: 'New York', country: 'USA', isp: 'Verizon Communications' },
+        { city: 'London', region: 'England', country: 'UK', isp: 'BT Group' },
+        { city: 'Tokyo', region: 'Tokyo', country: 'Japan', isp: 'NTT Communications' },
+        { city: 'Sydney', region: 'New South Wales', country: 'Australia', isp: 'Telstra' },
+        { city: 'Mumbai', region: 'Maharashtra', country: 'India', isp: 'Airtel' }
+      ];
+
+      // Simple hash to pick one "random" location based on IP
+      let hash = 0;
+      for (let i = 0; i < ip.length; i++) {
+        hash += ip.charCodeAt(i) * (i + 1);
+      }
+      const loc = fakeLocations[hash % fakeLocations.length];
+
+      const output = `
+IP Address : ${ip}
+City       : ${loc.city}
+Region     : ${loc.region}
+Country    : ${loc.country}
+ISP        : ${loc.isp}
+      `.trim();
+
+      resultBox.textContent = output;
+      return false;
+    }
+  </script>
+</body>
+</html>
+

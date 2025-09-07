@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Threat Intelligence - Advanced Toolkit</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+      color: #e0e0e0;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #162a3a;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #7fffd4;
+      text-shadow: 0 0 8px #7fffd4aa;
+      text-transform: uppercase;
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      background: #193549dd;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.9);
+      color: #c0f0e8;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    section h2 {
+      font-size: 2rem;
+      border-bottom: 3px solid #7fffd4;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      color: #7fffd4;
+    }
+    p, ul {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 12px;
+    }
+    .feed {
+      background: #124058;
+      border-radius: 12px;
+      padding: 20px;
+      max-height: 280px;
+      overflow-y: auto;
+      box-shadow: inset 0 0 12px #7fffd466;
+      font-family: monospace;
+      color: #a0fff0;
+    }
+    .feed-item {
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #7fffd422;
+    }
+    .feed-item strong {
+      color: #00e5c4;
+    }
+    .btn {
+      margin-top: 15px;
+      padding: 12px 25px;
+      background-color: #7fffd4;
+      color: #193549;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 15px #7fffd488;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #49d3bf;
+      color: #fff;
+      box-shadow: 0 7px 20px #49d3bf88;
+    }
+    nav {
+      text-align: center;
+      margin-top: 30px;
+    }
+    nav a {
+      padding: 12px 24px;
+      background: #7fffd4;
+      color: #193549;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 15px #7fffd488;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #49d3bf;
+      box-shadow: 0 6px 20px #49d3bf88;
+      color: #fff;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #162a3a;
+      color: #b1e4db;
+      font-size: 0.9rem;
+      margin-top: auto;
+      box-shadow: inset 0 1px 3px #7fffd444;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Threat Intelligence</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>🔍 What is Threat Intelligence?</h2>
+      <p>Threat Intelligence (TI) involves collecting and analyzing information about threats and threat actors to help organizations prepare, prevent, and respond to cyber attacks.</p>
+      <ul>
+        <li>Indicators of Compromise (IoCs)</li>
+        <li>Vulnerability data</li>
+        <li>Attack patterns and tactics</li>
+        <li>Real-time threat feeds and alerts</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🛰️ Real-time Threat Feed Demo</h2>
+      <div class="feed" id="threatFeed">
+        <!-- Threat data will be appended here -->
+      </div>
+      <button class="btn" id="fetchThreatBtn">Fetch New Threat</button>
+    </section>
+
+    <section>
+      <h2>📖 Resources to Explore</h2>
+      <ul>
+        <li><a href="https://www.fireeye.com/solutions/cyber-threat-intelligence.html" target="_blank" rel="noopener">FireEye Threat Intelligence</a></li>
+        <li><a href="https://www.cisa.gov/insights/what-threat-intelligence" target="_blank" rel="noopener">CISA: What is Threat Intelligence?</a></li>
+        <li><a href="https://www.recordedfuture.com/threat-intelligence" target="_blank" rel="noopener">Recorded Future - Threat Intelligence Explained</a></li>
+        <li><a href="https://www.youtube.com/watch?v=GIEODp7gXQU" target="_blank" rel="noopener">YouTube: Threat Intelligence Basics</a></li>
+      </ul>
+    </section>
+
+    <nav><a href="index.html">⬅️ Back to Home</a></nav>
+  </main>
+
+  <footer>© 2025 Cyber Toolkit | Crafted for hackers & learners</footer>
+
+  <script>
+    const threatFeed = document.getElementById('threatFeed');
+    const fetchBtn = document.getElementById('fetchThreatBtn');
+
+    const threats = [
+      {
+        time: "2025-05-24 14:10:22",
+        source: "Malware Domain List",
+        description: "New phishing domain detected hosting credential stealers."
+      },
+      {
+        time: "2025-05-24 14:15:05",
+        source: "OpenPhish",
+        description: "Credential phishing campaign targeting financial institutions."
+      },
+      {
+        time: "2025-05-24 14:20:33",
+        source: "AlienVault OTX",
+        description: "Exploit kit delivery detected via compromised websites."
+      },
+      {
+        time: "2025-05-24 14:22:50",
+        source: "Abuse.ch",
+        description: "C2 infrastructure identified for ransomware campaigns."
+      },
+      {
+        time: "2025-05-24 14:30:17",
+        source: "Recorded Future",
+        description: "Advanced persistent threat (APT) group activity increased."
+      },
+      {
+        time: "2025-05-24 14:35:40",
+        source: "CISA",
+        description: "Zero-day vulnerability exploit attempts in the wild."
+      }
+    ];
+
+    function addThreat() {
+      if(threats.length === 0) return;
+
+      const threat = threats.shift();
+
+      const item = document.createElement('div');
+      item.classList.add('feed-item');
+      item.innerHTML = `<strong>${threat.time} [${threat.source}]</strong><br>${threat.description}`;
+
+      threatFeed.prepend(item);
+
+      // Limit feed length to 6
+      if (threatFeed.children.length > 6) {
+        threatFeed.removeChild(threatFeed.lastChild);
+      }
+    }
+
+    fetchBtn.onclick = () => addThreat();
+
+    // Initial load: add 2 threats
+    addThreat();
+    addThreat();
+  </script>
+</body>
+</html>

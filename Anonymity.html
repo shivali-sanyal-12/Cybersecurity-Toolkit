@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anonymity & Privacy Techniques</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #1f1f1f;
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px #000a;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      color: #33ff99;
+      text-shadow: 0 0 12px #33ff9977;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto 60px;
+      background: #222;
+      border-radius: 20px;
+      padding: 35px 40px;
+      box-shadow: 0 15px 40px #000a;
+    }
+    section {
+      margin-bottom: 45px;
+    }
+    section h2 {
+      font-size: 2rem;
+      border-bottom: 3px solid #33ff99;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+    ul {
+      padding-left: 22px;
+      font-size: 1.15rem;
+      line-height: 1.5;
+    }
+    ul li {
+      margin-bottom: 14px;
+    }
+    .demo-box {
+      background: #111;
+      border-radius: 15px;
+      padding: 25px 30px;
+      box-shadow: inset 0 0 18px #33ff9966;
+      font-family: monospace;
+      font-size: 1.1rem;
+      color: #33ff99;
+      user-select: none;
+      margin-top: 12px;
+      min-height: 120px;
+    }
+    button {
+      background-color: #33ff99;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      border-radius: 20px;
+      color: #121212;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 9px 26px #33ff9977;
+      transition: background-color 0.3s ease;
+      margin-top: 18px;
+    }
+    button:hover {
+      background-color: #29d67a;
+      box-shadow: 0 12px 35px #29d67a99;
+    }
+    nav {
+      text-align: center;
+      margin-top: 35px;
+    }
+    nav a {
+      background: #33ff99;
+      color: #121212;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 20px;
+      box-shadow: 0 8px 28px #33ff9966;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #29d67a;
+      box-shadow: 0 12px 35px #29d67a99;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Anonymity & Privacy Techniques</h1>
+  </header>
+  <main>
+    <section>
+      <h2>What is Anonymity?</h2>
+      <p>Anonymity is the state of being unidentifiable within a set of subjects, allowing you to browse, communicate, or operate without revealing your real identity or location.</p>
+      <ul>
+        <li>Protects user privacy and freedom.</li>
+        <li>Common in whistleblowing, journalism, privacy-conscious browsing.</li>
+        <li>Techniques include using proxy servers, VPNs, Tor network, and anonymous communication tools.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Proxy Server Check Demo</h2>
+      <p>Click the button below to simulate checking if you are using a proxy server (for demo purposes, it randomly simulates results).</p>
+      <button id="proxyCheckBtn">Check Proxy Status</button>
+      <div class="demo-box" id="proxyResult">Press the button to check proxy status...</div>
+    </section>
+
+    <section>
+      <h2>Tor Network Overview</h2>
+      <p>Tor (The Onion Router) enables anonymous communication by routing your traffic through multiple encrypted nodes, obscuring your origin IP address and preventing tracking.</p>
+      <p><strong>How Tor Works:</strong></p>
+      <ul>
+        <li>Your data is encrypted in multiple layers (like an onion).</li>
+        <li>Traffic passes through at least 3 Tor nodes before reaching the destination.</li>
+        <li>Each node peels off a layer of encryption, never knowing both origin and destination.</li>
+        <li>This provides strong anonymity but can reduce browsing speed.</li>
+      </ul>
+    </section>
+
+    <nav><a href="index.html">⬅️ Back to Home</a></nav>
+  </main>
+  <footer style="text-align:center; padding:16px; background:#111; color:#33ff99; font-size:0.9rem;">
+    © 2025 Cyber Toolkit | Stay Anonymous, Stay Safe
+  </footer>
+
+  <script>
+    const proxyBtn = document.getElementById('proxyCheckBtn');
+    const proxyResult = document.getElementById('proxyResult');
+
+    proxyBtn.addEventListener('click', () => {
+      proxyResult.textContent = 'Checking proxy status...';
+
+      // Simulate a delay like real network check
+      setTimeout(() => {
+        const isProxy = Math.random() > 0.5; // Randomly true or false
+        if(isProxy) {
+          proxyResult.textContent = 'Proxy detected: Your connection is routed through a proxy server.';
+        } else {
+          proxyResult.textContent = 'No proxy detected: Your connection appears direct.';
+        }
+      }, 1500);
+    });
+  </script>
+</body>
+</html>

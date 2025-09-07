@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cryptography - Advanced Toolkit</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #eee;
+      margin: 0; padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #3b0a45;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: #e9d8fd;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      font-style: italic;
+      color: #d1c4e9;
+    }
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 40px auto;
+      background: rgba(0,0,0,0.6);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    }
+    section {
+      margin-bottom: 50px;
+    }
+    section h2 {
+      font-size: 2rem;
+      border-bottom: 2px solid #9f7aea;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      color: #d6bcfa;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 25px;
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+    ul li {
+      margin-bottom: 12px;
+    }
+    a {
+      color: #9f7aea;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #d6bcfa;
+      text-decoration: underline;
+    }
+    .demo {
+      background: #272335;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-family: 'Courier New', Courier, monospace;
+      overflow-x: auto;
+      color: #f0f0f0;
+      box-shadow: inset 0 0 10px #5b3e99;
+    }
+    .demo input[type="text"], .demo input[type="number"] {
+      padding: 8px;
+      margin-right: 10px;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: none;
+      width: 180px;
+    }
+    .demo button {
+      padding: 8px 16px;
+      background-color: #7c3aed;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+    .demo button:hover {
+      background-color: #9f7aea;
+    }
+    .output {
+      margin-top: 15px;
+      background: #1a1725;
+      padding: 15px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 1.1rem;
+      color: #c7d2fe;
+    }
+    nav {
+      text-align: center;
+      margin-top: 30px;
+    }
+    nav a {
+      padding: 12px 24px;
+      background: #7c3aed;
+      color: white;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 15px #7c3aedaa;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #9f7aea;
+      box-shadow: 0 6px 20px #9f7aeaaa;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #3b0a45;
+      color: #d6bcfa;
+      font-size: 0.9rem;
+      margin-top: auto;
+      box-shadow: inset 0 1px 3px #9f7aea44;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cryptography</h1>
+    <p>Explore advanced ciphers, encode & decode, and learn cryptographic concepts</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>🔐 Classic Cipher Demo: Caesar Cipher</h2>
+      <p>Shift each letter by a fixed number to encrypt or decrypt messages.</p>
+      <div class="demo">
+        <input type="text" id="caesarInput" placeholder="Enter text here" />
+        <input type="number" id="caesarShift" value="3" min="1" max="25" />
+        <button onclick="caesarEncrypt()">Encrypt</button>
+        <button onclick="caesarDecrypt()">Decrypt</button>
+        <pre class="output" id="caesarOutput"></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>🧰 Advanced Crypto Tools</h2>
+      <ul>
+        <li><a href="https://gchq.github.io/CyberChef/" target="_blank" rel="noopener">CyberChef</a> - Multi-tool for all kinds of encoding, encryption, and data manipulation</li>
+        <li><a href="https://www.dcode.fr/en" target="_blank" rel="noopener">DCode</a> - Online cipher and puzzle solver</li>
+        <li><a href="https://cryptii.com/" target="_blank" rel="noopener">Cryptii</a> - Visual cipher operations & converters</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📚 Learn More</h2>
+      <p>Practice cryptography with these platforms:</p>
+      <ul>
+        <li><a href="https://cryptopals.com/" target="_blank" rel="noopener">Cryptopals Challenges</a> - Real-world cryptography challenges</li>
+        <li><a href="https://tryhackme.com/" target="_blank" rel="noopener">TryHackMe Crypto Rooms</a> - Interactive labs and walkthroughs</li>
+        <li><a href="https://ctf101.org/" target="_blank" rel="noopener">CTF 101</a> - Basics of crypto and security for beginners</li>
+      </ul>
+    </section>
+
+    <nav><a href="index.html">⬅️ Back to Home</a></nav>
+  </main>
+
+  <footer>© 2025 Cyber Toolkit | Crafted for hackers & learners</footer>
+
+  <script>
+    function caesarEncrypt() {
+      const input = document.getElementById('caesarInput').value;
+      const shift = parseInt(document.getElementById('caesarShift').value);
+      let result = '';
+      for (let i = 0; i < input.length; i++) {
+        let char = input[i];
+        if (char.match(/[a-z]/i)) {
+          let code = input.charCodeAt(i);
+          let base = (code >= 65 && code <= 90) ? 65 : 97;
+          let shifted = ((code - base + shift) % 26) + base;
+          result += String.fromCharCode(shifted);
+        } else {
+          result += char;
+        }
+      }
+      document.getElementById('caesarOutput').textContent = result;
+    }
+
+    function caesarDecrypt() {
+      const input = document.getElementById('caesarInput').value;
+      const shift = parseInt(document.getElementById('caesarShift').value);
+      let result = '';
+      for (let i = 0; i < input.length; i++) {
+        let char = input[i];
+        if (char.match(/[a-z]/i)) {
+          let code = input.charCodeAt(i);
+          let base = (code >= 65 && code <= 90) ? 65 : 97;
+          let shifted = ((code - base - shift + 26) % 26) + base;
+          result += String.fromCharCode(shifted);
+        } else {
+          result += char;
+        }
+      }
+      document.getElementById('caesarOutput').textContent = result;
+    }
+  </script>
+</body>
+</html>
+

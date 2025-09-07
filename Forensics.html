@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Forensics - Advanced Toolkit</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1c23, #121417);
+      color: #dfe3e8;
+      margin: 0; padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #15171e;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.7);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #e76f51;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #f4f1de;
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      background: rgba(30, 30, 40, 0.95);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.85);
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    section h2 {
+      font-size: 2rem;
+      border-bottom: 3px solid #e76f51;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      color: #e76f51;
+    }
+    p, ul {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 12px;
+    }
+    a {
+      color: #e76f51;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #f4a261;
+      text-decoration: underline;
+    }
+    .demo {
+      background: #1f222b;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: inset 0 0 15px #e76f5166;
+      color: #f4a261;
+    }
+    input[type="file"] {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: #f4a261;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      color: #f4a261;
+    }
+    th, td {
+      border: 1px solid #e76f51;
+      padding: 12px 15px;
+      text-align: left;
+    }
+    th {
+      background-color: #e76f51;
+      color: #121417;
+    }
+    nav {
+      text-align: center;
+      margin-top: 30px;
+    }
+    nav a {
+      padding: 12px 24px;
+      background: #e76f51;
+      color: #121417;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 15px #e76f5166;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #f4a261;
+      box-shadow: 0 6px 20px #f4a261aa;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #15171e;
+      color: #f4f1de;
+      font-size: 0.9rem;
+      margin-top: auto;
+      box-shadow: inset 0 1px 3px #e76f5144;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Forensics</h1>
+    <p>File Metadata Extractor & Forensic Basics Demo</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>🕵️‍♂️ Upload a file to analyze metadata</h2>
+      <div class="demo">
+        <input type="file" id="fileInput" />
+        <table id="metadataTable" hidden>
+          <thead>
+            <tr><th>Property</th><th>Value</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>📖 Forensics Explained</h2>
+      <p>Digital forensics involves the collection, preservation, and analysis of digital evidence from electronic devices to uncover cybercrimes or data breaches.</p>
+      <ul>
+        <li><strong>File Metadata:</strong> Information such as file name, size, type, last modified date, and creation date can provide clues about digital activity.</li>
+        <li><strong>Hashing:</strong> Computing hashes (like SHA-256) of files ensures data integrity and helps detect tampering.</li>
+        <li><strong>Timeline Analysis:</strong> Correlating file timestamps and logs to reconstruct event sequences.</li>
+        <li><strong>Data Recovery:</strong> Techniques to retrieve deleted or hidden data.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🔗 Useful Resources</h2>
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Digital_forensics" target="_blank" rel="noopener">Digital Forensics on Wikipedia</a></li>
+        <li><a href="https://www.sans.org/digital-forensics/" target="_blank" rel="noopener">SANS Digital Forensics Courses</a></li>
+        <li><a href="https://www.coursera.org/learn/digital-forensics" target="_blank" rel="noopener">Digital Forensics by Coursera</a></li>
+        <li><a href="https://www.nist.gov/itl/ssd/software-quality-group/digital-forensics" target="_blank" rel="noopener">NIST Digital Forensics</a></li>
+      </ul>
+    </section>
+
+    <nav><a href="index.html">⬅️ Back to Home</a></nav>
+  </main>
+
+  <footer>© 2025 Cyber Toolkit | Crafted for hackers & learners</footer>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const metadataTable = document.getElementById('metadataTable');
+    const tbody = metadataTable.querySelector('tbody');
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      tbody.innerHTML = ''; // Clear previous
+
+      if (!file) {
+        metadataTable.hidden = true;
+        return;
+      }
+
+      const rows = [
+        ['File Name', file.name],
+        ['File Size', `${(file.size / 1024).toFixed(2)} KB`],
+        ['File Type', file.type || 'Unknown'],
+        ['Last Modified', new Date(file.lastModified).toLocaleString()],
+        ['Last Modified (Timestamp)', file.lastModified],
+      ];
+
+      rows.forEach(([prop, val]) => {
+        const tr = document.createElement('tr');
+        const tdProp = document.createElement('td');
+        tdProp.textContent = prop;
+        const tdVal = document.createElement('td');
+        tdVal.textContent = val;
+        tr.appendChild(tdProp);
+        tr.appendChild(tdVal);
+        tbody.appendChild(tr);
+      });
+
+      metadataTable.hidden = false;
+    });
+  </script>
+</body>
+</html>

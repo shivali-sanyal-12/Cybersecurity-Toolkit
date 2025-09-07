@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cybersecurity Toolkit</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+    }
+
+    header {
+      margin: 60px 20px 30px;
+      text-align: center;
+      text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      margin-bottom: 0.2em;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: #ffe5b4dd;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      padding-bottom: 60px;
+    }
+
+    /* Card-style buttons */
+    .btn {
+      background: rgba(255 255 255 / 0.2);
+      border-radius: 18px;
+      padding: 40px 25px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgb(255 255 255 / 0.15);
+      backdrop-filter: blur(10px);
+      transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid transparent;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      background: white;
+      color: #1a2a6c;
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgb(255 255 255 / 0.7);
+      border-color: #fdbb2d;
+      outline: none;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px 10px;
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: #fff8e1cc;
+      user-select: none;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 400px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      .btn {
+        font-size: 1.1rem;
+        padding: 32px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cybersecurity Toolkit</h1>
+    <p>Explore advanced concepts across cybersecurity domains</p>
+  </header>
+
+  <main>
+    <a href="cryptography.html" class="btn">Cryptography</a>
+    <a href="steganography.html" class="btn">Steganography</a>
+    <a href="osint.html" class="btn">OSINT</a>
+    <a href="forensics.html" class="btn">Forensics</a>
+    <a href="malware.html" class="btn">Malware Analysis</a>
+    <a href="pentest.html" class="btn">Penetration Testing</a>
+    <a href="socialengg.html" class="btn">Social Engineering</a>
+    <a href="threatint.html" class="btn">Threat Intelligence</a>
+    <a href="netsec.html" class="btn">Network Security</a>
+    <a href="dataleak.html" class="btn">Data Leak Analysis</a>
+    <a href="anonymity.html" class="btn">Anonymity & Privacy</a>
+    <a href="blockchain.html" class="btn">Blockchain Security</a>
+    <a href="reverseengg.html" class="btn">Reverse Engineering</a>
+  </main>
+
+  <footer>
+    &copy; 2025 Cybersecurity Toolkit — Crafted with passion 🔐
+  </footer>
+</body>
+</html>

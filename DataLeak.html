@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Data Leak Detection & Prevention</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #1a1a1a;
+      color: #e0e0e0;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #222;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px #000a;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      letter-spacing: 2px;
+      color: #ff6666;
+      text-shadow: 0 0 8px #ff6666aa;
+      text-transform: uppercase;
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #2a2a2a;
+      border-radius: 18px;
+      padding: 35px 40px;
+      box-shadow: 0 12px 35px #0008;
+      color: #f5f5f5;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    section h2 {
+      font-size: 2rem;
+      border-bottom: 3px solid #ff6666;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+    p, ul {
+      font-size: 1.15rem;
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 22px;
+    }
+    ul li {
+      margin-bottom: 12px;
+    }
+    textarea {
+      width: 100%;
+      height: 140px;
+      background: #333;
+      border: none;
+      border-radius: 12px;
+      color: #f5f5f5;
+      font-family: monospace;
+      font-size: 1rem;
+      padding: 15px 18px;
+      resize: vertical;
+      box-shadow: inset 0 0 10px #ff666633;
+      margin-bottom: 15px;
+    }
+    button {
+      background: #ff6666;
+      color: #1a1a1a;
+      font-weight: 700;
+      border: none;
+      border-radius: 15px;
+      padding: 14px 28px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 8px 22px #ff6666cc;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background: #ff4d4d;
+      box-shadow: 0 10px 30px #ff4d4dcc;
+    }
+    .results {
+      background: #111;
+      border-radius: 15px;
+      padding: 20px;
+      font-family: monospace;
+      font-size: 1.1rem;
+      box-shadow: inset 0 0 15px #ff666644;
+      max-height: 240px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      color: #ff9999;
+    }
+    nav {
+      text-align: center;
+      margin-top: 35px;
+    }
+    nav a {
+      padding: 14px 30px;
+      background: #ff6666;
+      color: #1a1a1a;
+      border-radius: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 6px 20px #ff6666cc;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #ff4d4d;
+      box-shadow: 0 8px 28px #ff4d4dcc;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Data Leak Detection & Prevention</h1>
+  </header>
+  <main>
+    <section>
+      <h2>Overview</h2>
+      <p>Data leaks happen when sensitive information is exposed unintentionally. Detecting leaks early and preventing them is vital for protecting privacy and maintaining security compliance.</p>
+      <ul>
+        <li>Common sensitive data: Emails, passwords, credit card numbers, Social Security numbers.</li>
+        <li>Leak sources: Misconfigured databases, insider threats, phishing attacks, poor access controls.</li>
+        <li>Detection techniques: Pattern matching, keyword scanning, anomaly detection.</li>
+        <li>Prevention: Encryption, data masking, access controls, employee training.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Leak Detection Demo</h2>
+      <p>Paste any text below to scan for potential sensitive information leaks like email addresses or credit card numbers.</p>
+      <textarea id="dataInput" placeholder="Paste text or data here..."></textarea>
+      <button id="scanBtn">Scan for Leaks</button>
+      <div class="results" id="scanResults">No scan performed yet.</div>
+    </section>
+
+    <nav><a href="index.html">⬅️ Back to Home</a></nav>
+  </main>
+  <footer style="text-align:center; padding:16px; background:#222; color:#ff6666; font-size:0.9rem;">
+    © 2025 Cyber Toolkit | Protect Your Data
+  </footer>
+
+  <script>
+    const scanBtn = document.getElementById('scanBtn');
+    const scanResults = document.getElementById('scanResults');
+    const dataInput = document.getElementById('dataInput');
+
+    // Patterns for emails, credit cards (simple regex), SSNs (US format)
+    const patterns = {
+      email: /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g,
+      creditCard: /\b(?:\d[ -]*?){13,16}\b/g,
+      ssn: /\b\d{3}-\d{2}-\d{4}\b/g
+    };
+
+    scanBtn.addEventListener('click', () => {
+      const text = dataInput.value;
+      if (!text.trim()) {
+        scanResults.textContent = "Please paste some data to scan.";
+        return;
+      }
+
+      let results = "";
+
+      const emails = text.match(patterns.email);
+      const cards = text.match(patterns.creditCard);
+      const ssns = text.match(patterns.ssn);
+
+      if (emails) {
+        results += `Found Email(s):\n${emails.join('\n')}\n\n`;
+      }
+      if (cards) {
+        results += `Found Credit Card Number(s):\n${cards.join('\n')}\n\n`;
+      }
+      if (ssns) {
+        results += `Found SSN(s):\n${ssns.join('\n')}\n\n`;
+      }
+      if (!results) {
+        results = "No sensitive data patterns detected.";
+      }
+
+      scanResults.textContent = results;
+    });
+  </script>
+</body>
+</html>

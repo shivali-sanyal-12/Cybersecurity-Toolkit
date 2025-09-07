@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Steganography - Advanced Toolkit</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #e0e6f1;
+      margin: 0; padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #16222a;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      letter-spacing: 1.5px;
+      font-weight: 900;
+      color: #a3cef1;
+      text-transform: uppercase;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #9fc5e8;
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      background: rgba(20, 32, 44, 0.85);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    section h2 {
+      font-size: 2rem;
+      border-bottom: 3px solid #6ea8f7;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      color: #a3cef1;
+    }
+    p, ul {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #c1d1e8;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 12px;
+    }
+    a {
+      color: #6ea8f7;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #a3cef1;
+      text-decoration: underline;
+    }
+    .demo {
+      background: #122433;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      box-shadow: inset 0 0 15px #3f6fc5;
+      color: #d0e2ff;
+    }
+    input[type="file"] {
+      margin-top: 10px;
+      margin-bottom: 15px;
+      font-size: 1rem;
+      color: #a3cef1;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      border-radius: 8px;
+      border: none;
+      padding: 10px;
+      font-size: 1.1rem;
+      background-color: #223e5a;
+      color: #d0e2ff;
+      resize: vertical;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #3f6fc5;
+      border: none;
+      border-radius: 8px;
+      color: #d0e2ff;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #6293e1;
+    }
+    .output {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #1a2a45;
+      border-radius: 8px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 1.1rem;
+      color: #b3c7ff;
+      min-height: 70px;
+    }
+    nav {
+      text-align: center;
+      margin-top: 30px;
+    }
+    nav a {
+      padding: 12px 24px;
+      background: #3f6fc5;
+      color: white;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 15px #3f6fc5aa;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #6293e1;
+      box-shadow: 0 6px 20px #6293e1aa;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #16222a;
+      color: #9fc5e8;
+      font-size: 0.9rem;
+      margin-top: auto;
+      box-shadow: inset 0 1px 3px #6ea8f755;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Steganography</h1>
+    <p>Hide secret messages inside images using advanced LSB techniques</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>🖼️ Hide & Reveal Text in Image (LSB Demo)</h2>
+      <p>Upload an image and a secret message to embed. Extract hidden text from an image.</p>
+      <div class="demo">
+        <label for="imgInput">Select PNG image:</label><br />
+        <input type="file" id="imgInput" accept="image/png" />
+        <textarea id="secretMessage" placeholder="Enter secret message to hide..."></textarea>
+        <br />
+        <button onclick="embedMessage()">Embed Message</button>
+        <button onclick="extractMessage()">Extract Message</button>
+        <div class="output" id="output"></div>
+        <canvas id="canvas" style="display:none;"></canvas>
+      </div>
+    </section>
+
+    <section>
+      <h2>🔧 Useful Tools & Resources</h2>
+      <ul>
+        <li><a href="https://stylesuxx.github.io/steganography/" target="_blank" rel="noopener">Online Image Steganography Tool</a></li>
+        <li><a href="https://github.com/RobinDavid/LSB-Steganography" target="_blank" rel="noopener">GitHub LSB Steganography Implementations</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Steganography" target="_blank" rel="noopener">Wikipedia: Steganography</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📚 Learn & Practice</h2>
+      <ul>
+        <li><a href="https://www.nostarch.com/hidinginplaintext" target="_blank" rel="noopener">Hiding in Plain Sight: Steganography Book</a></li>
+        <li><a href="https://tryhackme.com/room/steganography" target="_blank" rel="noopener">TryHackMe Steganography Room</a></li>
+        <li><a href="https://ctf101.org/steganography" target="_blank" rel="noopener">CTF101 Steganography Tutorials</a></li>
+      </ul>
+    </section>
+
+    <nav><a href="index.html">⬅️ Back to Home</a></nav>
+  </main>
+
+  <footer>© 2025 Cyber Toolkit | Crafted for hackers & learners</footer>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const imgInput = document.getElementById('imgInput');
+    const output = document.getElementById('output');
+    const secretMessage = document.getElementById('secretMessage');
+    let imgData = null;
+
+    imgInput.addEventListener('change', () => {
+      const file = imgInput.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          output.textContent = 'Image loaded. Ready for embedding or extraction.';
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function embedMessage() {
+      if (!imgData) {
+        output.textContent = 'Please load a PNG image first.';
+        return;
+      }
+      const msg = secretMessage.value;
+      if (!msg) {
+        output.textContent = 'Please enter a secret message.';
+        return;
+      }
+      const binaryMsg = toBinary(msg) + '00000000'; // null terminator
+      if (binaryMsg.length > imgData.data.length / 4) {
+        output.textContent = 'Message too long for this image.';
+        return;
+      }
+      const newData = new Uint8ClampedArray(imgData.data);
+      let dataIndex = 0;
+      for (let i = 0; i < binaryMsg.length; i++) {
+        // Modify the LSB of red channel only for simplicity
+        const bit = parseInt(binaryMsg[i]);
+        newData[dataIndex] = (newData[dataIndex] & 0xFE) | bit;
+        dataIndex += 4; // skip to next pixel red channel
+      }
+      const newImgData = new ImageData(newData, imgData.width, imgData.height);
+      ctx.putImageData(newImgData, 0, 0);
+      const encodedURL = canvas.toDataURL('image/png');
+      output.innerHTML = `Message embedded! <br> <a href="${encodedURL}" download="stego.png" style="color:#6ea8f7; font-weight:bold;">Download stego image</a>`;
+    }
+
+    function extractMessage() {
+      if (!imgData) {
+        output.textContent = 'Please load a PNG image first.';
+        return;
+      }
+      let bits = '';
+      for (let i = 0; i < imgData.data.length; i += 4) {
+        bits += (imgData.data[i] & 1).toString();
+      }
+      let message = '';
+      for (let i = 0; i < bits.length; i += 8) {
+        const byte = bits.substr(i, 8);
+        if (byte === '00000000') break;
+        message += String.fromCharCode(parseInt(byte, 2));
+      }
+      output.textContent = message || 'No hidden message found.';
+    }
+
+    function toBinary(str) {
+      return str.split('')
+        .map(char => char.charCodeAt(0).toString(2).padStart(8, '0'))
+        .join('');
+    }
+  </script>
+</body>
+</html>
